@@ -1,0 +1,148 @@
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+	id="ftco-navbar">
+	<div class="container">
+		<h3><b>Automart</b></h3>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+			aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="oi oi-menu"></span> Menu
+		</button>
+
+		<div class="collapse navbar-collapse" id="ftco-nav">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active"><a class="nav-link" [routerLink]="['']">Home</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/vehicles']" >Vehicles</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/spare-parts']">Spare Parts</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/cart']">My Cart</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/contact-us']">Contact Us</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Login</a>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+</nav>
+<div class="hero-wrap" style="background-image: url('../assets/background.jpg');margin-top:7%;"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container p-3">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row text-center">
+          <div class="col-5" *ngFor="let item of cartItems">
+            <div class="property-wrap">
+              <a class="img" [style.background-image]="'url(http://localhost:4000/uploads/' + item.photo +')'"></a>
+              <div class="text">
+                <p class="price"><span class="orig-price" >{{item.price |number:'1.2-2'}}</span></p>
+                <p class="price"><span class="orig-price" *ngIf="item.downpayment">{{item.downpayment |number:'1.2-2'}}</span></p>
+                <span class="location">{{item.description }}</span>
+                <span class="location">{{item.description }}</span>
+                <br/>
+                <span class="location">Qty - {{item.expon }}</span>
+                <div class="pt-2">
+                  <button class="btn btn-sm btn-danger" (click)="removeItemFromCart(item)">Remove Item</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card  p-3">
+          <div class="text-center">
+            <h5>Oder Sumary</h5>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td>Oder Sub Total</td>
+                    <td>{{total | number:'1.2-2'}}</td>
+                  </tr>
+                  <tr>
+                    <td>Oder Total</td>
+                    <td>{{total | number:'1.2-2'}}</td>
+                  </tr>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
+                class="btn sort btn-block btn-secondary"><i class="fa fa-check-circle">&nbsp;&nbsp;</i>Proceed
+                Payment</button>
+            </div>
+            <div class="col-md-6">
+              <button type="button" class="btn sort btn-block btn-danger" (click)="clearCart()"><i
+                  class="fa fa-check-circle">&nbsp;&nbsp;</i>Clear Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Payment Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+                  <label id="label" for="exampleInputEmail1">Card Holder</label>
+                  <input type="text" [(ngModel)]="card_holder" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label id="label" for="exampleInputEmail1">Card Number</label>
+                  <input type="text" [(ngModel)]="card_no" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label id="label" for="exampleInputEmail1">Card Type</label>
+                  <select class="form-control"  [(ngModel)]="card_type">
+                    <option>Visa</option>
+                    <option>American Express</option>
+                    <option>Master</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label id="label" for="exampleInputEmail1">CSV</label>
+                  <input type="text" [(ngModel)]="card_csv" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label id="label" for="exampleInputEmail1">Expire Date</label>
+                  <input type="date" [(ngModel)]="card_exp" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col-md-6">
+                    <button type="button" (click)="payOrder()" class="btn btn-block btn-secondary">Pay</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-block btn-danger"  data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+	id="ftco-navbar">
+	<div class="container">
+		<h3><b>Automart</b></h3>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+			aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="oi oi-menu"></span> Menu
+		</button>
+
+		<div class="collapse navbar-collapse" id="ftco-nav">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active"><a class="nav-link" [routerLink]="['']">Home</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/vehicles']" >Vehicles</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/spare-parts']">Spare Parts</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/cart']">My Cart</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/contact-us']">Contact Us</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Login</a>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+</nav>
+<div class="hero-wrap" style="background-image: url('../assets/background.jpg');margin-top:7%;"
+  data-stellar-background-ratio="0.5">
+  <div class="container p-3">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let car of carList">
+        <div class="property-wrap">
+          <a class="img" [style.background-image]="'url(http://localhost:4000/uploads/' + car.photo +')'"></a>
+            <div class="text">
+              <p class="price"><span class="orig-price">Price (Rs.) - {{car.price |number:'1.2-2'}}</span></p>
+              <p class="price"><span class="orig-price">Payment (Rs.) - {{car.downpayment |number:'1.2-2'}}</span></p>
+              <span class="location">{{car.brand }} | </span>
+              <span class="location">{{car.model}} | </span>
+              <span class="location">{{car.prodyr}} </span>
+              <span class="location">{{car.mileage}}KM </span>
+              <span class="location">Down Payment - {{car.downpayment|number:'1.2-2'}}</span>
+              <!-- <input type="number"> -->
+              <div class="text-center mt-2">
+                  <button class="btn btn-sm btn-secondary" (click)="addToCart(car)">Add to Cart</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,47 +1,79 @@
-<div class="wrapper custom-padding">
-
+<div class="wrapper">
   <nav id="sidebar">
     <ul class="list-unstyled components">
       <li>
-        <a href="#">
-          <i class="fa fa-home"></i>
-          Add New Stock
+        <a (click)="setRoute('addNewVehicles')">
+          <i class="fa fa-car"></i>
+          Add Vehicles
         </a>
       </li>
       <li>
-        <a href="#">
+        <a (click)="setRoute('addNewSparePart')">
+          <i class="fa fa-cogs"></i>
+          Add Spare Parts
+        </a>
+        <a (click)="setRoute('viewInventory')">
           <i class="fa fa-briefcase"></i>
-          About
-        </a>
-        <a href="#" >
-          <i class="fa fa-copy"></i>
-          Pages
+          View Inventory
         </a>
       </li>
       <li>
-        <a href="#">
-          <i class="fa fa-image"></i>
-          Portfolio
+        <a (click)="setRoute('addUsers')">
+          <i class="fa fa-user"></i>
+          Add Users
         </a>
       </li>
       <li>
-        <a href="#">
-          <i class="fa fa-question"></i>
-          FAQ
+        <a (click)="setRoute('updateUser')">
+          <i class="fa fa-user"></i>
+          Update Users
         </a>
       </li>
       <li>
-        <a href="#">
-          <i class="fa fa-paper-plane"></i>
-          Contact
+        <a (click)="setRoute('viewReport1')">
+          <i class="fa fa-file"></i>
+          View Order Report
+        </a>
+      </li>
+      <li>
+        <a (click)="setRoute('viewReport2')">
+          <i class="fa fa-file"></i>
+          View Inventory Report
+        </a>
+      </li>
+      <li>
+        <a (click)="logout()">
+          <i class="fa fa-power-off"></i>
+          Logout
         </a>
       </li>
     </ul>
   </nav>
 
   <div id="content">
-
-    <h2>Content goes here</h2>
-
+    <div class="text-right" >
+      <h4><b>Automart Admin Dashboard</b></h4>
+    </div>
+    <div *ngIf="addNewVehicles">
+      <add-cars></add-cars>
+    </div>
+    <div *ngIf="addNewSparePart">
+      <app-add-spare-parts></app-add-spare-parts>
+    </div>
+    <div *ngIf="viewInventory">
+      <app-view-inventory></app-view-inventory>
+    </div>
+    <div *ngIf="addUsers">
+      <app-add-users></app-add-users>
+    </div>
+    <div *ngIf="updateUser">
+      <app-update-users></app-update-users>
+    </div>
+    <div *ngIf="viewReport1">
+      <app-order-details-report></app-order-details-report>
+    </div>
+    <div *ngIf="viewReport2">
+      <app-inventory-report></app-inventory-report>
+    </div>
   </div>
 </div>

@@ -1,0 +1,142 @@
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+	id="ftco-navbar">
+	<div class="container">
+		<h3><b>Automart</b></h3>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+			aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="oi oi-menu"></span> Menu
+		</button>
+
+		<div class="collapse navbar-collapse" id="ftco-nav">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active"><a class="nav-link" [routerLink]="['']">Home</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/vehicles']" >Vehicles</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/spare-parts']">Spare Parts</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/cart']">My Cart</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/contact-us']">Contact Us</a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Login</a>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+</nav>
+<div class="hero-wrap" style="background-image: url('../assets/background.jpg');margin-top:7%;"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container pt-5">
+    <div class="app-body pt-3" *ngIf="signIn">
+      <main class="main d-flex align-items-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5 mx-auto">
+              <div class="card-group">
+                <div class="card p-4">
+                  <div class="card-body">
+                    <h1>Login</h1>
+                    <p class="text-muted">Sign In to your account</p>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <input type="text" [(ngModel)]="userName" class="form-control" placeholder="Username"
+                        autocomplete="username" required>
+                    </div>
+                    <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                      </div>
+                      <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password"
+                        autocomplete="current-password" required>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4"></div>
+                      <div class="col-4">
+                        <button type="button" (click)="switchToSignUp()"
+                          class="btn btn-block btn-secondary ">SignUp</button>
+                      </div>
+                      <div class="col-4">
+                        <button type="button" (click)="authenticate()"
+                          class="btn btn-block btn-secondary ">Login</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="app-body pt-3" *ngIf="signUp">
+      <main class="main d-flex align-items-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5 mx-auto">
+              <div class="card-group">
+                <div class="card p-4">
+                  <div class="card-body">
+                    <h1>Sign up Here</h1>
+                    <p class="text-muted">Register as an Automart Customer </p>
+
+                    <div class="row mb-2">
+                      <div class="col-md-6">
+                        <select [(ngModel)]="title" class="form-control">
+                          <option>Mr</option>
+                          <option>Mrs</option>
+                          <option>Ms</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-6">
+                        <input type="text" [(ngModel)]="firstName" class="form-control" placeholder="First Name"
+                          autocomplete="current-password" required>
+                      </div>
+                      <div class="col-md-6">
+                        <input type="text" [(ngModel)]="lastName" class="form-control" placeholder="Last Name"
+                          autocomplete="current-password" required>
+                      </div>
+                    </div>
+                    <div class="input-group mb-2">
+                      <input type="text" [(ngModel)]="email" class="form-control" placeholder="Email"
+                        autocomplete="current-password" required>
+                    </div>
+                    <div class="input-group mb-2">
+                      <input type="text" [(ngModel)]="phone" class="form-control" placeholder="Contact Number"
+                        autocomplete="current-password" required>
+                    </div>
+                    <div class="input-group mb-2">
+                      <input type="text" [(ngModel)]="nic" class="form-control" placeholder="NIC"
+                        autocomplete="current-password" required>
+                    </div>
+                    <div class="input-group mb-2">
+                      <input type="text" [(ngModel)]="address" class="form-control" placeholder="Address"
+                        autocomplete="current-password" required>
+                    </div>
+                    <div class="input-group mb-2">
+                      <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password"
+                        autocomplete="current-password" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-4">
+                            <button type="button" (click)="register()" class="btn btn-secondary btn-block">Register</button>
+                        </div>
+                        <div class="col-4">
+                          <button type="button" (click)="this.switchToLogin()"
+                            class="btn btn-block btn-secondary ">Login</button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+  </div>
+
+</div>

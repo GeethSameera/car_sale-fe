@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-sm-12 col-md-12">
+    <div class="card default-height">
+      <div class="card-header fix-padding">
+        <h3>
+          <i></i>Order Details</h3>
+      </div>
+
+      <div class="card-body">
+        <div class="row pl-3" id="report_content" #report_content>
+          <div class="col-md-12 pl-4">
+            <br />
+            <div class="text-center mb-4">
+              <h4>
+                <b>Order Summary</b>
+              </h4>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <label id="label" for="exampleInputEmail1">
+                  <b>From Date</b>
+                </label>
+                <input type="date" [(ngModel)]="fromDate" class="form-control  custom-fonts" id="exampleInputEmail1"
+                  aria-describedby="emailHelp">
+              </div>
+              <div class="col-md-3">
+                <label id="label" for="exampleInputEmail1">
+                  <b>To Date</b>
+                </label>
+                <input type="date" [(ngModel)]="toDate" class="form-control  custom-fonts" id="exampleInputEmail1"
+                  aria-describedby="emailHelp">
+              </div>
+              <div class="col-md-3">
+                <label id="label" for="exampleInputEmail1">Title</label>
+                <select class="form-control" [(ngModel)]="filter">
+                  <option value="all">All</option>
+                  <option value="cars">Cars</option>
+                  <option value="parts">Parts</option>
+                </select>
+              </div>
+              <div class="col-md-3 text-right">
+                <p>
+                  <b>Report Date : {{currentDate|date:'dd/MM/yyyy'}}</b>
+                </p>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-12">
+                <table class="table table-striped table-bordered table-sm">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Order ID</th>
+                      <th scope="col">Cutomer Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Orde Date</th>
+                      <th scope="col">Order Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let payment of PaymentsList">
+                      <td>{{payment.orderId}}</td>
+                      <td>{{payment.buyer.fname + " "+ payment.buyer.lname }}</td>
+                      <td>{{payment.buyer.email}}</td>
+                      <td>{{payment.orderDate | date:'dd/MM/yyyy' }}</td>
+                      <td  class="text-right">{{calculateOrderTotal(payment)|number:'1.2-2'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6 text-right">
+                    Net Total : {{netTotal | number: '1.2-2'}}
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <div class="row">
+          <div class="col-md-12 ">
+            <div class="btn-toolbar pull-right" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group mr-2" role="group">
+                <button type="button" (click)="viewDetails()" class="btn btn-outline-dark">
+                  <i class="fa fa-eye"></i>&nbsp; View </button>
+              </div>
+              <div class="btn-group mr-2" role="group">
+                <button type="button" (click)="captureScreen()" class="btn btn-outline-dark ">
+                  <i class="fa fa-save"></i>&nbsp; Download As PDF</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

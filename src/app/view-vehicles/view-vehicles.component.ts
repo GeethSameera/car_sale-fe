@@ -1,0 +1,54 @@
+import { Component, OnInit } from '@angular/core';
+import { InventoryService } from '../services/inventory.service';
+import { DataService } from '../services/data.service';
+import { ToasterService } from '../services/toastr.service';
+
+@Component({
+  selector: 'app-view-vehicles',
+  templateUrl: './view-vehicles.component.html',
+  styleUrls: ['./view-vehicles.component.sass']
+})
+export class ViewVehiclesComponent implements OnInit {
+
+  carList:any[];
+  cart: any[] = [];
+
+  constructor(private inventoryService:InventoryService,
+    private dataService:DataService,
+    private toasterService:ToasterService
+    ) { }
+
+  ngOnInit() {
+    this.getInventoryData()
+  }
+
+  getInventoryData(){
+    this.inventoryService.getItemList().subscribe(
+      data =>{
+        console.log(data)
+        this.carList = data.data.cars;
+      }
+    )
+  }
+
+  addToCart(item:any){
+    if(this.isLoggedIn()){
+      item.expon = 1
+    this.dataService.shoppingCart.push(item)
+    this.toasterService.Info("Item Added to Cart")
+    console.log(this.dataService.shoppingCart)
+    }
+    else{
+      this.toasterService.Error("Please Log in to Automart First")
+    }
+  }
+
+  isLoggedIn(){
+    if (localStorage.getItem("isLoggedIn") == "false") {
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+}
