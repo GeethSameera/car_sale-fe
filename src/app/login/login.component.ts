@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
   address;
   userPassword;
   role;
+  loggedIn: boolean;
 
   constructor(private authService: AuthService,
     private router: Router,
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isLoggedIn();
   }
 
   authenticate() {
@@ -55,6 +57,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['admin'])
         }
         else {
+          localStorage.setItem('loggedUser', this.loggedInUser);
           this.router.navigate([''])
         }
         localStorage.setItem('isLoggedIn', "true");
@@ -115,6 +118,19 @@ export class LoginComponent implements OnInit {
     this.address = ""
     this.password = ""
     this.role = ""
+  }
+
+  isLoggedIn() {
+    if (localStorage.getItem("isLoggedIn") == "true") {
+      this.loggedIn = true;
+    }
+  }
+
+  logout(){
+    localStorage.setItem('isLoggedIn', "false");
+    localStorage.setItem('loggedUser', "none");
+    this.loggedIn = false;
+    this.router.navigate(['']);
   }
 
 }

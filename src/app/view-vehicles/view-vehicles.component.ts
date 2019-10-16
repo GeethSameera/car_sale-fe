@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../services/inventory.service';
 import { DataService } from '../services/data.service';
 import { ToasterService } from '../services/toastr.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-vehicles',
@@ -12,14 +13,17 @@ export class ViewVehiclesComponent implements OnInit {
 
   carList:any[];
   cart: any[] = [];
+  loggedIn: boolean;
 
   constructor(private inventoryService:InventoryService,
     private dataService:DataService,
-    private toasterService:ToasterService
+    private toasterService:ToasterService,
+    private router: Router,
     ) { }
 
   ngOnInit() {
-    this.getInventoryData()
+    this.getInventoryData();
+    this.isLoggedIn();
   }
 
   getInventoryData(){
@@ -45,10 +49,19 @@ export class ViewVehiclesComponent implements OnInit {
 
   isLoggedIn(){
     if (localStorage.getItem("isLoggedIn") == "false") {
+      this.loggedIn = false;
       return false;
     }
     else{
+      this.loggedIn = true;
       return true;
     }
+  }
+
+  logout(){
+    localStorage.setItem('isLoggedIn', "false");
+    localStorage.setItem('loggedUser', "none");
+    this.loggedIn = false;
+    this.router.navigate(['']);
   }
 }

@@ -1,25 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-	id="ftco-navbar">
-	<div class="container">
-		<h3><b>Automart</b></h3>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-			aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="oi oi-menu"></span> Menu
-		</button>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+  <div class="container">
+    <h3><b>Automart</b></h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="oi oi-menu"></span> Menu
+    </button>
 
-		<div class="collapse navbar-collapse" id="ftco-nav">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link" [routerLink]="['']">Home</a></li>
-				<li class="nav-item"><a class="nav-link" [routerLink]="['/vehicles']" >Vehicles</a></li>
-				<li class="nav-item"><a class="nav-link" [routerLink]="['/spare-parts']">Spare Parts</a></li>
-				<li class="nav-item"><a class="nav-link" [routerLink]="['/cart']">My Cart</a></li>
-				<li class="nav-item"><a class="nav-link" [routerLink]="['/contact-us']">Contact Us</a></li>
-				<li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Login</a>
-				</li>
-			</ul>
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active"><a class="nav-link" [routerLink]="['']">Home</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/vehicles']">Vehicles</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/spare-parts']">Spare Parts</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/cart']">My Cart</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/contact-us']">Contact Us</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Login</a>
+        <li class="nav-item" *ngIf="loggedIn"><a (click)="logout()" class="nav-link">Logout</a></li>
+      </ul>
 
-		</div>
-	</div>
+    </div>  
+  </div>
 </nav>
 <div class="hero-wrap" style="background-image: url('../assets/background.jpg');margin-top:7%;"
   data-stellar-background-ratio="0.5">
@@ -119,15 +118,15 @@
                         autocomplete="current-password" required>
                     </div>
                     <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-4">
-                            <button type="button" (click)="register()" class="btn btn-secondary btn-block">Register</button>
-                        </div>
-                        <div class="col-4">
-                          <button type="button" (click)="this.switchToLogin()"
-                            class="btn btn-block btn-secondary ">Login</button>
-                        </div>
+                      <div class="col-md-4"></div>
+                      <div class="col-4">
+                        <button type="button" (click)="register()" class="btn btn-secondary btn-block">Register</button>
                       </div>
+                      <div class="col-4">
+                        <button type="button" (click)="this.switchToLogin()"
+                          class="btn btn-block btn-secondary ">Login</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

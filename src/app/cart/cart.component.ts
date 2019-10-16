@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { InventoryService } from '../services/inventory.service';
 import { ToasterService } from '../services/toastr.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -21,11 +22,13 @@ export class CartComponent implements OnInit {
   card_csv;
   card_exp;
   card_holder;
+  loggedIn: boolean;
 
   constructor(
     private dataService: DataService,
     private inventoryService: InventoryService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -37,6 +40,7 @@ export class CartComponent implements OnInit {
   getCartItems() {
     this.cartItems = this.dataService.shoppingCart;
     this.calculateTotal();
+    this.isLoggedIn();
   }
 
   calculateTotal() {
@@ -124,4 +128,18 @@ export class CartComponent implements OnInit {
     this.quantityList = [];
     this.priceList = [];
   }
+
+  isLoggedIn() {
+    if (localStorage.getItem("isLoggedIn") == "true") {
+      this.loggedIn = true;
+    }
+  }
+
+  logout(){
+    localStorage.setItem('isLoggedIn', "false");
+    localStorage.setItem('loggedUser', "none");
+    this.loggedIn = false;
+    this.router.navigate(['']);
+  }
+
 }
