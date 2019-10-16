@@ -13,6 +13,7 @@ export class ViewSparePartsComponent implements OnInit {
 
   sparePartsList: any[];
   loggedIn: boolean;
+  loggedInUser: string;
 
   constructor(private inventoryService: InventoryService,
     private toasterService: ToasterService,
@@ -52,6 +53,7 @@ export class ViewSparePartsComponent implements OnInit {
     }
     else {
       this.loggedIn = true;
+      this.loggedInUser = localStorage.getItem("loggedUser")
       return true;
     }
   }
@@ -59,7 +61,8 @@ export class ViewSparePartsComponent implements OnInit {
 
   logout(){
     localStorage.setItem('isLoggedIn', "false");
-    localStorage.setItem('loggedUser', "none");
+    localStorage.setItem('loggedUser', "Visitor");
+    this.loggedInUser = "Visitor"
     this.loggedIn = false;
     this.router.navigate(['']);
   }

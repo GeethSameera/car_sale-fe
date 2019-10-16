@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ContactUsComponent implements OnInit {
   loggedIn: boolean;
+  loggedInUser: string;
 
   constructor(private router:Router) { }
 
@@ -18,12 +19,14 @@ export class ContactUsComponent implements OnInit {
   isLoggedIn() {
     if (localStorage.getItem("isLoggedIn") == "true") {
       this.loggedIn = true;
+      this.loggedInUser = localStorage.getItem("loggedUser")
     }
   }
 
   logout(){
     localStorage.setItem('isLoggedIn', "false");
-    localStorage.setItem('loggedUser', "none");
+    localStorage.setItem('loggedUser', "Visitor");
+    this.loggedInUser = "Visitor"
     this.loggedIn = false;
     this.router.navigate(['']);
   }

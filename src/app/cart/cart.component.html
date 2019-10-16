@@ -16,6 +16,7 @@
 				<li class="nav-item"><a class="nav-link" [routerLink]="['/contact-us']">Contact Us</a></li>
         <li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Login</a>
         <li class="nav-item" *ngIf="loggedIn"><a (click)="logout()" class="nav-link">Logout</a></li>
+        <li class="nav-item" ><a class="nav-link"><b>Hi,{{loggedInUser}}</b></a></li>
 			</ul>
 
 		</div>
@@ -85,7 +86,7 @@
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
       aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content" [formGroup]="paymentForm">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalCenterTitle">Payment Details</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -97,19 +98,25 @@
               <div class="row">
                 <div class="col-md-12">
                   <label id="label" for="exampleInputEmail1">Card Holder</label>
-                  <input type="text" [(ngModel)]="card_holder" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <span *ngIf="paymentForm.controls.card_holder.invalid && isValid" class="required"
+                  aria-required="true"> * </span>
+                  <input type="text" formControlName="card_holder" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <label id="label" for="exampleInputEmail1">Card Number</label>
-                  <input type="text" [(ngModel)]="card_no" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <span *ngIf="paymentForm.controls.card_no.invalid && isValid" class="required"
+                  aria-required="true"> * </span>
+                  <input type="text" formControlName="card_no" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <label id="label" for="exampleInputEmail1">Card Type</label>
-                  <select class="form-control"  [(ngModel)]="card_type">
+                  <span *ngIf="paymentForm.controls.card_type.invalid && isValid" class="required"
+                  aria-required="true"> * </span>
+                  <select class="form-control"  formControlName="card_type">
                     <option>Visa</option>
                     <option>American Express</option>
                     <option>Master</option>
@@ -119,13 +126,17 @@
               <div class="row">
                 <div class="col-md-12">
                   <label id="label" for="exampleInputEmail1">CSV</label>
-                  <input type="text" [(ngModel)]="card_csv" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <span *ngIf="paymentForm.controls.card_csv.invalid && isValid" class="required"
+                  aria-required="true"> * </span>
+                  <input type="text" formControlName="card_csv" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <label id="label" for="exampleInputEmail1">Expire Date</label>
-                  <input type="date" [(ngModel)]="card_exp" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <span *ngIf="paymentForm.controls.card_exp.invalid && isValid" class="required"
+                  aria-required="true"> * </span>
+                  <input type="date" formControlName="card_exp" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
               </div>
               <div class="row pt-3">

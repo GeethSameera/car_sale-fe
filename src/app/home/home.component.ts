@@ -10,7 +10,7 @@ import { InventoryService } from '../services/inventory.service';
 export class HomeComponent implements OnInit {
 
   carList = [];
-  loggedInUser = "Login"
+  loggedInUser = "" ;
   loggedIn:boolean ;
   constructor(private router:Router,private inventoryService:InventoryService) { }
 
@@ -33,13 +33,15 @@ export class HomeComponent implements OnInit {
   }
   isLoggedIn() {
     if (localStorage.getItem("isLoggedIn") == "true") {
+      this.loggedInUser = localStorage.getItem("loggedUser");
       this.loggedIn = true;
     }
   }
 
   logout(){
     localStorage.setItem('isLoggedIn', "false");
-    localStorage.setItem('loggedUser', "none");
+    localStorage.setItem('loggedUser', "Visitor");
+    this.loggedInUser = "Visitor"
     this.loggedIn = false;
     this.router.navigate(['']);
   }

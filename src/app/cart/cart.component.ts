@@ -3,6 +3,7 @@ import { DataService } from '../services/data.service';
 import { InventoryService } from '../services/inventory.service';
 import { ToasterService } from '../services/toastr.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +17,7 @@ export class CartComponent implements OnInit {
   itemList = [];
   quantityList = [];
   priceList = [];
+  paymentForm:FormGroup;
 
   card_type;
   card_no;
@@ -23,6 +25,8 @@ export class CartComponent implements OnInit {
   card_exp;
   card_holder;
   loggedIn: boolean;
+  isValid: boolean;
+  loggedInUser: string;
 
   constructor(
     private dataService: DataService,
@@ -35,6 +39,14 @@ export class CartComponent implements OnInit {
     this.getCartItems();
     this.processItemList();
     this.setPaymentArrays();
+
+    this.paymentForm = new FormGroup({
+      card_holder: new FormControl('',Validators.required),
+      card_type: new FormControl('',Validators.required),
+      card_no: new FormControl('',[Validators.required,Validators.maxLength(16),Validators.minLength(16)]),
+      card_csv: new FormControl('',[Validators.required,Validators.maxLength(3),Validators.minLength(3)]),
+      card_exp: new FormControl('',Validators.required)
+    })
   }
 
   getCartItems() {
@@ -88,27 +100,33 @@ export class CartComponent implements OnInit {
   }
 
   payOrder() {
+    this.validateForm();
     let item = {
-      "card_type": this.card_type,
-      "card_no": this.card_no,
-      "card_csv": this.card_csv,
-      "card_exp": this.card_exp,
-      "card_holder": this.card_holder,
-      "buyer_id": this.dataService.loginDetails.userid,
+      "card_type": this.paymentForm.get('card_type').value,
+      "card_no":this.paymentForm.get('card_no').value,
+      "card_csv": this.paymentForm.get('card_csv').value,
+      "card_exp": this.paymentForm.get('card_exp').value,
+      "card_holder": this.paymentForm.get('card_holder').value,
+      "buyer_id":  this.dataService.loginDetails.userid,
       "item_list": this.itemList,
       "quantity_list": this.quantityList,
       "per_unit_price": this.priceList
     }
-    console.log(item)
-    this.inventoryService.pay(item).subscribe(
-      data => {
-        this.toasterService.Success("Payment Successfull")
-        this.clearCart();
-      },
-      error => {
-        this.toasterService.Error("Payment Failed")
-      }
-    )
+    // console.log(item)
+    if(this.paymentForm.status == "VALID"){
+      this.inventoryService.pay(item).subscribe(
+        data => {
+          this.toasterService.Success("Payment Successfull")
+          this.clearCart();
+        },
+        error => {
+          this.toasterService.Error("Payment Failed")
+        }
+      )
+    }
+    else{
+      this.toasterService.Error("Some Required Fields are Empty")
+    }
   }
 
   clearCart() {
@@ -132,14 +150,19 @@ export class CartComponent implements OnInit {
   isLoggedIn() {
     if (localStorage.getItem("isLoggedIn") == "true") {
       this.loggedIn = true;
+      this.loggedInUser = localStorage.getItem("loggedUser")
     }
   }
 
   logout(){
     localStorage.setItem('isLoggedIn', "false");
-    localStorage.setItem('loggedUser', "none");
+    localStorage.setItem('loggedUser', "Visitor");
     this.loggedIn = false;
+    this.loggedInUser = "Visitor"
     this.router.navigate(['']);
   }
 
+  validateForm() {
+    this.isValid = true;
+  }
 }

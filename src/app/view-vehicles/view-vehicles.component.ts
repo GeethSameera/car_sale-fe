@@ -14,6 +14,7 @@ export class ViewVehiclesComponent implements OnInit {
   carList:any[];
   cart: any[] = [];
   loggedIn: boolean;
+  loggedInUser: string;
 
   constructor(private inventoryService:InventoryService,
     private dataService:DataService,
@@ -54,13 +55,15 @@ export class ViewVehiclesComponent implements OnInit {
     }
     else{
       this.loggedIn = true;
+      this.loggedInUser = localStorage.getItem("loggedUser")
       return true;
     }
   }
 
   logout(){
     localStorage.setItem('isLoggedIn', "false");
-    localStorage.setItem('loggedUser', "none");
+    localStorage.setItem('loggedUser', "Visitor");
+    this.loggedInUser = "Visitor"
     this.loggedIn = false;
     this.router.navigate(['']);
   }
