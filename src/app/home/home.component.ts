@@ -33,9 +33,9 @@ export class HomeComponent implements OnInit {
   }
   isLoggedIn() {
     if (localStorage.getItem("isLoggedIn") == "true") {
-      this.loggedInUser = localStorage.getItem("loggedUser");
       this.loggedIn = true;
     }
+    this.loggedInUser = localStorage.getItem("loggedUser");
   }
 
   logout(){

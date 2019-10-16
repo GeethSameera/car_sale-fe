@@ -49,11 +49,13 @@ export class ViewSparePartsComponent implements OnInit {
   isLoggedIn() {
     if (localStorage.getItem("isLoggedIn") == "false") {
       this.loggedIn =false;
+      this.loggedInUser = localStorage.getItem("loggedUser");
       return false;
     }
     else {
       this.loggedIn = true;
       this.loggedInUser = localStorage.getItem("loggedUser")
+      this.loggedInUser = localStorage.getItem("loggedUser");
       return true;
     }
   }

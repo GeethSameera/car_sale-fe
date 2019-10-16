@@ -52,7 +52,7 @@ export class AdminPanelComponent implements OnInit {
   }
 logout(){
   localStorage.setItem('isLoggedIn', "false");
-  localStorage.setItem('loggedUser', "none");
+  localStorage.setItem('loggedUser', "Visitor");
   this.router.navigate(['']);
 }
   disableRoutes(){

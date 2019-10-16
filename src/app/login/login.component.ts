@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
           this.toasterService.Success("Welcome to Automart")
           this.loggedInUser = data.data.fname;
           this.dataService.loginDetails = data.data;
-          if (data.data.userid == 1) {
+          if (data.data.role == "admin") {
             localStorage.setItem('loggedUser', "admin");
             this.enableTopNav = false;
             this.router.navigate(['admin'])
@@ -175,8 +175,8 @@ export class LoginComponent implements OnInit {
   isLoggedIn() {
     if (localStorage.getItem("isLoggedIn") == "true") {
       this.loggedIn = true;
-      this.loggedInUser = localStorage.getItem("loggedUser")
     }
+    this.loggedInUser = localStorage.getItem("loggedUser")
   }
 
   logout(){

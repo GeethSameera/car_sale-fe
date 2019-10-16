@@ -48,8 +48,10 @@
                     </div>
                     <div class="col-md-4">
                       <label id="label" for="exampleInputEmail1">User Role</label>
-                      <input type="text" [(ngModel)]="role" class="form-control" placeholder="User Role"
-                        autocomplete="current-password" required>
+                      <select class="form-control" [(ngModel)]="role">
+                        <option value="admin">Admin</option>
+                        <option value="cust">Customer</option>
+                      </select>
                     </div>
                   </div>
                   <div class="row">
@@ -72,8 +74,8 @@
                     </div>
                     <div class="col-md-4">
                       <label id="label" for="exampleInputEmail1">Confirm Password</label>
-                      <input type="password" [(ngModel)]="confPassword" class="form-control" placeholder="Confirm Password"
-                        autocomplete="current-password" required>
+                      <input type="password" [(ngModel)]="confPassword" class="form-control"
+                        placeholder="Confirm Password" autocomplete="current-password" required>
                     </div>
                   </div>
                 </div>

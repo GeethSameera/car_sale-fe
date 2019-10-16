@@ -150,8 +150,9 @@ export class CartComponent implements OnInit {
   isLoggedIn() {
     if (localStorage.getItem("isLoggedIn") == "true") {
       this.loggedIn = true;
-      this.loggedInUser = localStorage.getItem("loggedUser")
     }
+    this.loggedInUser = localStorage.getItem("loggedUser")
+    
   }
 
   logout(){
