@@ -24,6 +24,7 @@ export class UpdateUsersComponent implements OnInit {
   public userList = [];
   public userListOrig= [] ;
   public passwordForm:FormGroup;
+  public disableSave
 
 
 
@@ -98,6 +99,7 @@ export class UpdateUsersComponent implements OnInit {
     this.invetoryService.deleteUser(this.selectedUserID).subscribe(
       data =>{
         this.toasterService.Success("User Removed");
+        this.disableSave = true;
         this.clearForm();
       },
       error=>{

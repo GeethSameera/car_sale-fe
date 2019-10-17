@@ -139,7 +139,7 @@
                   <i class="fa fa-trash"></i>&nbsp; Update Password</button>
               </div>
               <div class="btn-group mr-2" role="group">
-                <button type="button" (click)="updateUser()" class="btn btn-outline-dark ">
+                <button type="button" [disabled]="disableSave" (click)="updateUser()" class="btn btn-outline-dark ">
                   <i class="fa fa-save"></i>&nbsp; Save</button>
               </div>
               <div class="btn-group mr-2" role="group">

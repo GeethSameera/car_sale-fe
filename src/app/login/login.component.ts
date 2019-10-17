@@ -87,6 +87,9 @@ export class LoginComponent implements OnInit {
           }
           localStorage.setItem('isLoggedIn', "true");
   
+        },
+        error =>{
+          this.toasterService.Error("Authentication Failed")
         }
       )
     }
