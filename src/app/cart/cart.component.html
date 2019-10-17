@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 	id="ftco-navbar">
 	<div class="container">
-		<h3><b>Automart</b></h3>
+      <h2 style="color:white"><b>Automart</b></h2>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 			aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="oi oi-menu"></span> Menu
@@ -14,7 +14,7 @@
 				<li class="nav-item"><a class="nav-link" [routerLink]="['/spare-parts']">Spare Parts</a></li>
 				<li class="nav-item"><a class="nav-link" [routerLink]="['/cart']">My Cart</a></li>
 				<li class="nav-item"><a class="nav-link" [routerLink]="['/contact-us']">Contact Us</a></li>
-        <li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Login</a>
+        <li class="nav-item" *ngIf="!loggedIn"><a class="nav-link" [routerLink]="['/login']">Login</a>
         <li class="nav-item" *ngIf="loggedIn"><a (click)="logout()" class="nav-link">Logout</a></li>
         <li class="nav-item" ><a class="nav-link"><b>Hi,{{loggedInUser}}</b></a></li>
 			</ul>
@@ -32,9 +32,9 @@
           <div class="col-5" *ngFor="let item of cartItems">
             <div class="property-wrap">
               <a class="img" [style.background-image]="'url(http://localhost:4000/uploads/' + item.photo +')'"></a>
-              <div class="text">
-                <p class="price"><span class="orig-price" >{{item.price |number:'1.2-2'}}</span></p>
-                <p class="price"><span class="orig-price" *ngIf="item.downpayment">{{item.downpayment |number:'1.2-2'}}</span></p>
+              <div class="text" style="width: 100%;margin-top: 0px;margin-left: 0px">
+                <p class="price"><span class="orig-price" >Price : {{item.price |number:'1.2-2'}}</span></p>
+                <p class="price"><span class="orig-price" *ngIf="item.downpayment">Down Payment : {{item.downpayment |number:'1.2-2'}}</span></p>
                 <span class="location">{{item.description }}</span>
                 <span class="location">{{item.description }}</span>
                 <br/>

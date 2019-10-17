@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   carList = [];
   loggedInUser = "" ;
-  loggedIn:boolean ;
+  loggedIn:boolean  = false ;
   constructor(private router:Router,private inventoryService:InventoryService) { }
 
   ngOnInit() {

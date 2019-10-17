@@ -81,14 +81,14 @@ h1, h2, h3, h4, h5,
 }
 
 .ftco-navbar-light {
-	background: transparent!important;
+	// background: transparent!important;
 	position: absolute;
-	top: 20px;
+	top: 22px;
 	left: 0;
 	right: 0;
 	z-index: 3;
 	@include media-breakpoint-down(md) {
-		background: $black!important;
+		// background: $black!important;
 		position: relative;
 		top: 0;
 	}

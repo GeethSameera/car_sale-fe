@@ -6,7 +6,7 @@ import { ToasterService } from '../services/toastr.service';
 @Component({
   selector: 'app-update-users',
   templateUrl: './update-users.component.html',
-  styleUrls: ['./update-users.component.sass']
+  styleUrls: ['./update-users.component.scss']
 })
 export class UpdateUsersComponent implements OnInit {
 
@@ -23,6 +23,7 @@ export class UpdateUsersComponent implements OnInit {
   public isValid = false;
   public userList = [];
   public userListOrig= [] ;
+  public passwordForm:FormGroup;
 
 
 
@@ -30,6 +31,12 @@ export class UpdateUsersComponent implements OnInit {
 
   ngOnInit() {
     this.getAllUser();
+
+    this.passwordForm = new FormGroup({
+      oldpw: new FormControl('',[Validators.required]),
+      newpw: new FormControl('',[Validators.required,Validators.minLength(8)]),
+      confpw: new FormControl('',[Validators.required,Validators.minLength(8)]),
+    })
   }
 
   filterUser(){
@@ -107,5 +114,47 @@ export class UpdateUsersComponent implements OnInit {
     this.nic = "";
     this.phone = "";
     this.address = "";
+  }
+
+  updatePassword(){
+    this.validateForm();
+    let passwordModel = {
+      userid: this.selectedUserID ,
+      oldpw:this.passwordForm.get('oldpw').value,
+      newpw:this.passwordForm.get('newpw').value
+    }
+
+    if(this.checkPassword()){
+      if( this.passwordForm.status == 'VALID'){
+        this.invetoryService.changePW(passwordModel).subscribe(
+          data=>{
+            this.passwordForm.reset();
+            this.toasterService.Success("Password Updated");
+          },
+          error=>{
+            this.toasterService.Error("Password Update Failed")
+          }
+        )
+      }
+      else{
+        this.toasterService.Error("Some Require Fields are Empty")
+      }
+    }
+    else{
+      this.toasterService.Error("Password Doesnt Match")
+    }
+  }
+
+  checkPassword(){
+    if(this.passwordForm.get('newpw').value == this.passwordForm.get('confpw').value){
+      return true
+    }
+    else{
+      return false;
+    }
+  }
+
+  validateForm() {
+    this.isValid = true;
   }
 }

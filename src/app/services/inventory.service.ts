@@ -37,6 +37,9 @@ export class InventoryService {
   getUsers(): Observable<any> {
     return this._http.get<any>(`${this.getPath()}/user/getall`);
   }
+  changePW(body:any): Observable<any> {
+    return this._http.post<any>(`${this.getPath()}/auth/changepw`,body);
+  }
   deleteUser(userID:any): Observable<any> {
     return this._http.get<any>(`${this.getPath()}/user/delete?userid=${userID}`);
   }
