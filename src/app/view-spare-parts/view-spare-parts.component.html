@@ -28,8 +28,8 @@
     <div class="row">
       <div class="col-md-4" *ngFor="let part of sparePartsList">
         <div class="property-wrap">
-          <a class="img" [style.background-image]="'url(http://localhost:4000/uploads/' + part.photo +')'"></a>
-          <div class="text">
+          <a class="img img-responsive" [style.background-image]="'url(http://localhost:4000/uploads/' + part.photo +')'"></a>
+          <div class="text"  style="width: 100%;margin-top: 0px;margin-left: 0px">
             <p class="price"><span class="orig-price">Price (Rs.) - {{part.price |number:'1.2-2'}}</span></p>
             <span class="location">{{part.partname }} | </span>
             <span class="location">{{part.brand }}</span>

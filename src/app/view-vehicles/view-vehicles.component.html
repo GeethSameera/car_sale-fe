@@ -27,17 +27,17 @@
     <div class="row">
       <div class="col-md-4" *ngFor="let car of carList">
         <div class="property-wrap">
-          <a class="img" [style.background-image]="'url(http://localhost:4000/uploads/' + car.photo +')'"></a>
-          <div class="text">
+          <a class="img img-responsive" [style.background-image]="'url(http://localhost:4000/uploads/' + car.photo +')'"></a>
+          <div class="text" style="width: 100%;margin-top: 0px;margin-left: 0px">
             <p class="price"><span class="orig-price">Price (Rs.) - {{car.price |number:'1.2-2'}}</span></p>
-            <p class="price"><span class="orig-price">Payment (Rs.) - {{car.downpayment |number:'1.2-2'}}</span></p>
             <span class="location">{{car.brand }} | </span>
             <span class="location">{{car.model}} | </span>
             <span class="location">{{car.prodyr}} </span>
             <span class="location">{{car.mileage}}KM </span>
+            <br/>
             <span class="location">Down Payment - {{car.downpayment|number:'1.2-2'}}</span>
             <br/>
-            <span class="location">Availability - {{car.stock}}</span>
+            <span class="location">{{car.stock}} available</span>
             <!-- <input type="number"> -->
             <div class="text-center mt-2">
               <button class="btn btn-sm btn-secondary" [disabled]="car.stock == 0" (click)="addToCart(car)">Add to Cart</button>

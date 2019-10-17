@@ -10,24 +10,39 @@ import { ToasterService } from '../services/toastr.service';
 })
 export class UpdateUsersComponent implements OnInit {
 
-  public searchParameter = "";
+  public searchParameter;
+  public selectedUserID;
   public title;
   public fname;
   public lname;
   public nic;
   public phone;
   public address;
-  public
+  public searchView = true;
+  public updateView = false;
   public isValid = false;
+  public userList = [];
+  public userListOrig= [] ;
+
+
 
   constructor(private invetoryService: InventoryService, private toasterService: ToasterService) { }
 
   ngOnInit() {
-
+    this.getAllUser();
   }
 
-  searchUser() {
-    this.invetoryService.getUserData(this.searchParameter).subscribe(
+  filterUser(){
+    console.log(this.searchParameter)
+    this.userList = this.userListOrig.filter(data =>data.fname == this.searchParameter);
+    console.log(this.userList)
+  }
+
+  searchUser(id:any) {
+    this.searchView = false;
+    this.updateView = true;
+    this.selectedUserID = id;
+    this.invetoryService.getUserData(id).subscribe(
       data => {
         this.title = data.data.title;
         this.fname = data.data.fname;
@@ -43,9 +58,17 @@ export class UpdateUsersComponent implements OnInit {
     )
   }
 
+  getAllUser(){
+    this.invetoryService.getUsers().subscribe(
+      data =>{
+        this.userListOrig = data.data;
+        this.userList = data.data;
+      }
+    )
+  }
   updateUser() {
     let user = {
-      userid: this.searchParameter,
+      userid: this.selectedUserID,
       nic: this.nic,
       title: this.title,
       fname: this.fname,
@@ -60,6 +83,18 @@ export class UpdateUsersComponent implements OnInit {
       },
       error => {
         this.toasterService.Error("User Update Failed")
+      }
+    )
+  }
+
+  removeUser(){
+    this.invetoryService.deleteUser(this.selectedUserID).subscribe(
+      data =>{
+        this.toasterService.Success("User Removed");
+        this.clearForm();
+      },
+      error=>{
+        this.toasterService.Error("User Removal Failed")
       }
     )
   }

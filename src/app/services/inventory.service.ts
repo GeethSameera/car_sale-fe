@@ -34,6 +34,12 @@ export class InventoryService {
   getUserData(userID:any): Observable<any> {
     return this._http.get<any>(`${this.getPath()}/user/get?userid=${userID}`);
   }
+  getUsers(): Observable<any> {
+    return this._http.get<any>(`${this.getPath()}/user/getall`);
+  }
+  deleteUser(userID:any): Observable<any> {
+    return this._http.get<any>(`${this.getPath()}/user/delete?userid=${userID}`);
+  }
   deleteInventoryData(invID:any): Observable<any> {
     return this._http.get<any>(`${this.getPath()}/inventory/delete?invid=${invID}`);
   }

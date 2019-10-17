@@ -116,7 +116,7 @@ export class CartComponent implements OnInit {
     if(this.paymentForm.status == "VALID"){
       this.inventoryService.pay(item).subscribe(
         data => {
-          this.toasterService.Success("Payment Successfull")
+          this.toasterService.Success("Payment Successfull.Receipt Will be Sent to Your Email Shortly")
           this.clearCart();
         },
         error => {
