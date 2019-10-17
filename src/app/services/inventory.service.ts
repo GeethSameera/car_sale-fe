@@ -34,6 +34,9 @@ export class InventoryService {
   getUserData(userID:any): Observable<any> {
     return this._http.get<any>(`${this.getPath()}/user/get?userid=${userID}`);
   }
+  deleteInventoryData(invID:any): Observable<any> {
+    return this._http.get<any>(`${this.getPath()}/inventory/delete?invid=${invID}`);
+  }
   getReportData(fromDate:any,toDate:any,filter:any): Observable<any> {
     return this._http.get<any>(`${this.getPath()}/order/get?filter=${filter}&from=${fromDate}&to=${toDate}`);
   }

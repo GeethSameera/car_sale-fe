@@ -38,7 +38,10 @@
                       <td>{{car.price|number:'1.2-2'}}</td>
                       <td>{{car.downpayment|number:'1.2-2'}}</td>
                       <td>{{car.stock}}</td>
-                      <th><button class="form-control form-control-sm btn-primary" (click)="selectCar(car)">More</button></th>
+                      <th>
+                        <button class="form-control form-control-sm btn-primary mb-2" (click)="selectCar(car)">Edit</button>
+                        <button class="form-control form-control-sm btn-danger" (click)="setInvID(car)" data-toggle="modal" data-target="#exampleModalCenter">Delete</button>
+                      </th>
                     </tr>
                   </tbody>
                 </table>
@@ -74,7 +77,10 @@
                         <td>{{part.price}}</td>
                         <td>{{part.stock}}</td>
                         <td>{{part.description}}</td>
-                        <th><button class="form-control form-control-sm btn-primary"(click)="selectPart(part)">More</button></th>
+                        <th>
+                          <button class="form-control form-control-sm btn-primary mb-2"(click)="selectPart(part)">Edit</button>
+                          <button class="form-control form-control-sm btn-danger" (click)="setInvID(part)" data-toggle="modal" data-target="#exampleModalCenter">Delete</button>
+                        </th>
                       </tr>
                   </tbody>
                 </table>
@@ -109,3 +115,23 @@
 <div *ngIf="detailed_view_spare">
   <app-spare-detailed-view></app-spare-detailed-view>
 </div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Confirm Delete</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <h6> This item will be permanently deleted from the inventory ! </h6>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteItem()">Delete Item</button>
+          <button type="button" class="btn btn-danger">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>

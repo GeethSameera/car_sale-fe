@@ -36,9 +36,11 @@
             <span class="location">{{car.prodyr}} </span>
             <span class="location">{{car.mileage}}KM </span>
             <span class="location">Down Payment - {{car.downpayment|number:'1.2-2'}}</span>
+            <br/>
+            <span class="location">Availability - {{car.stock}}</span>
             <!-- <input type="number"> -->
             <div class="text-center mt-2">
-              <button class="btn btn-sm btn-secondary" (click)="addToCart(car)">Add to Cart</button>
+              <button class="btn btn-sm btn-secondary" [disabled]="car.stock == 0" (click)="addToCart(car)">Add to Cart</button>
             </div>
           </div>
         </div>

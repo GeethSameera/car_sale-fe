@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../services/inventory.service';
 import { DataService } from '../services/data.service';
+import { ToasterService } from '../services/toastr.service';
 
 @Component({
   selector: 'app-view-inventory',
@@ -10,13 +11,15 @@ import { DataService } from '../services/data.service';
 export class ViewInventoryComponent implements OnInit {
 
   carsList : any [];
+  invID;
   sparePArtsList : any[];
   detailed_view = false;
   regular_view = true;
   detailed_view_spare = false;
   constructor(
     private inventoryService : InventoryService,
-    private dataService:DataService
+    private dataService:DataService,
+    private toasterService:ToasterService
   ) { }
 
   ngOnInit() {
@@ -57,5 +60,21 @@ export class ViewInventoryComponent implements OnInit {
   selectPart(item:any){
     this.dataService.selectedPart = item;
     this.setRoute("detailed_view_spare");
+  }
+
+  deleteItem(){
+    this.inventoryService.deleteInventoryData(this.invID).subscribe(
+      data =>{
+        this.toasterService.Success("Item Deleted");
+        this.getInventoryData();
+      },
+      error =>{
+        this.toasterService.Error("Item Deletion Failed")
+      }
+    )
+  }
+
+  setInvID(item){
+    this.invID = item.invid;
   }
 }
