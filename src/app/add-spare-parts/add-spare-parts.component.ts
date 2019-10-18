@@ -36,6 +36,7 @@ export class AddSparePartsComponent implements OnInit {
     const formData = new FormData();
     formData.append('imageFile', this.formValid.get('imageFile').value);
     formData.append('item_type', this.formValid.get('item_type').value);
+    formData.append('part_name', this.formValid.get('part_name').value);
     formData.append('stock', this.formValid.get('stock').value);
     formData.append('brand', this.formValid.get('brand').value);
     formData.append('description', this.formValid.get('description').value);
